@@ -53,6 +53,14 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" No Auto change line in txt file
+set wrap
+set linebreak
+set nolist  " list disables linebreak
+set formatoptions+=l
+
+autocmd Filetype cs setlocal ts=4 sw=4 sts=0 noexpandtab
+
 " Open as maximum window
 au GUIEnter * simalt ~x
 
