@@ -69,6 +69,7 @@ map <Leader>c :CtrlP<CR>
 map <F2> :CtrlPBuffer<CR>
 map <F3> :CtrlPMRUFiles<CR>
 "map <F3> :CtrlPMRU<CR>
+let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.obj$|\.pyc$|\.meta$'
