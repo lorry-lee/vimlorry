@@ -66,7 +66,7 @@ au GUIEnter * simalt ~x
 
 " CtrlP settings
 map <Leader>c :CtrlP<CR>
-map <F2> :CtrlPBuffer<CR>
+map <F2> :CtrlP<CR>
 map <F3> :CtrlPMRUFiles<CR>
 "map <F3> :CtrlPMRU<CR>
 let g:ctrlp_by_filename = 1
