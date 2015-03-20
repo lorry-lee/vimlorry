@@ -65,7 +65,6 @@ autocmd Filetype cs setlocal ts=4 sw=4 sts=0 noexpandtab
 au GUIEnter * simalt ~x
 
 " CtrlP settings
-map <F2> :CtrlP<CR>
 map <F3> :CtrlPMRUFiles<CR>
 let g:ctrlp_cmd = 'CtrlP .'
 let g:ctrlp_by_filename = 1
