@@ -61,8 +61,6 @@ set formatoptions+=l
 
 autocmd Filetype cs setlocal ts=4 sw=4 sts=0 noexpandtab
 
-" Open as maximum window
-au GUIEnter * simalt ~x
 
 " CtrlP settings
 map <F3> :CtrlPMRUFiles<CR>
@@ -286,3 +284,8 @@ nmap <leader>m :make<cr>
 
 " Format json
 nmap <leader>j :%!python -m json.tool<cr>
+
+" Open as maximum window
+au GUIEnter * simalt ~x
+" For Mac
+" set lines=999 columns=999
