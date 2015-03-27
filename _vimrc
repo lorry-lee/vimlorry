@@ -99,7 +99,7 @@ map <C-F8> :QFix<CR>
 map <F8> :cn<CR>
 map <S-F8> :cp<CR>
 
-nmap <Tab> <C-Tab>
+nmap <Tab> <C-W><C-W>
 nmap <A-k> :wincmd k<CR>
 nmap <A-j> :wincmd j<CR>
 nmap <A-h> :wincmd h<CR>
