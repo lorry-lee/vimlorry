@@ -149,13 +149,6 @@ let ctags_path="./tags"
 " let ctags_path+="C:\Python26\Lib\site-packages\django\tags"
 
 set completeopt=longest,menu " Don't display the preview window
-let OmniCpp_DisplayMode = 1 " Display class members
-let OmniCpp_ShowScopeInAbbr = 1 " Display class name first
-let OmniCpp_ShowPrototypeInAbbr = 1 " Display the prototype of a function
-let OmniCpp_MayCompleteScope = 1 " Show matchs in scope
-let OmniCpp_SelectFirstItem = 0 " Select first item and insert as default
-let OmniCpp_LocalSearchDecl = 1 " Use local search
-let OmniCpp_NamespaceSearch = 0 " Disable namespace 
 
 " Easy motion short cut key
 let g:EasyMotion_leader_key = ";"
