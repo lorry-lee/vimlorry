@@ -150,6 +150,10 @@ let ctags_path="./tags"
 
 set completeopt=longest,menu " Don't display the preview window
 
+" YouCompleteMe
+nmap <C-]> :YcmCompleter GoTo<CR>
+let g:ycm_confirm_extra_conf = 0
+
 " Easy motion short cut key
 let g:EasyMotion_leader_key = ";"
 
