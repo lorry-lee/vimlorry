@@ -69,7 +69,7 @@ let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|\.obj$\|\.pyc$\|\.meta$'
-let g:ctrlp_root_markers = ['tags']
+let g:ctrlp_root_markers = ['root.dir']
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_prompt_mappings = { 'PrtSelectMove("j")':   ['<c-n>', '<down>'], 'PrtSelectMove("k")':   ['<c-p>', '<up>'], 'PrtHistory(-1)':       ['<c-j>'], 'PrtHistory(1)':        ['<c-k>'], 'PrtClearCache()':      ['<F4>'], } 
 
@@ -78,6 +78,8 @@ let g:ctrlp_prompt_mappings = { 'PrtSelectMove("j")':   ['<c-n>', '<down>'], 'Pr
 "map <S-o> :TlistToggle<CR>
 map <S-o> :TagbarToggle<CR>
 let g:Tlist_Ctags_Cmd='ctags.exe'
+"For mac
+"let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 " Just display the current buffer's functions
 let Tlist_Show_One_File = 1
 " Show tag list on the right side
@@ -135,16 +137,6 @@ map <Leader>g :NERDTreeFind<CR>
 
 " Switch between cpp and h files
 map <A-o> :A<CR>
-
-" Generate tags and cscope file, cscope_maps.vim will care about the bind
-function GenerateLatestTags()
-    silent !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q
-    silent !dir /s/b *.js,*.c,*.cpp,*.h,*.java >> cscope.files
-    silent !cscope -Rbk
-endfunction
-map <C-F12> :call GenerateLatestTags()<CR>
-let ctags_path="./tags"
-
 
 " let ctags_path+="C:\Python26\Lib\site-packages\django\tags"
 
