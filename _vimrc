@@ -191,6 +191,8 @@ function ExplorerCurrentBuffer()
 endfunction
 " Open the selected buffer in windows explorer
 nmap <F10> :!start explorer /select, %:p<CR>
+" For Mac
+nmap <F10> :silent !open -R %:p<CR>
 
 " Show dec or hex of current number-word under cursor
 nnoremap gn :call DecAndHex(expand("<cWORD>"))<CR>
