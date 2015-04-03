@@ -69,7 +69,7 @@ let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|\.obj$\|\.pyc$\|\.meta$'
-let g:ctrlp_root_markers = ['root.dir']
+let g:ctrlp_root_markers = ['.ycm_extra_conf.py']
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_prompt_mappings = { 'PrtSelectMove("j")':   ['<c-n>', '<down>'], 'PrtSelectMove("k")':   ['<c-p>', '<up>'], 'PrtHistory(-1)':       ['<c-j>'], 'PrtHistory(1)':        ['<c-k>'], 'PrtClearCache()':      ['<F4>'], } 
 
