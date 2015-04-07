@@ -59,7 +59,7 @@ set linebreak
 set nolist  " list disables linebreak
 set formatoptions+=l
 
-autocmd Filetype cs setlocal ts=4 sw=4 sts=0 noexpandtab
+"autocmd Filetype cs setlocal ts=4 sw=4 sts=0 noexpandtab
 
 
 " CtrlP settings
