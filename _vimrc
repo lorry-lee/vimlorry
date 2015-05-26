@@ -28,6 +28,9 @@ function MyDiff()
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
+" Make all map leaders use ;
+let mapleader = ","
+
 " Share the clipboard with windows
 set clipboard=unnamed
 
