@@ -29,7 +29,7 @@ function MyDiff()
 endfunction
 
 " Make all map leaders use ;
-let mapleader = ","
+" let mapleader = ","
 
 " Share the clipboard with windows
 set clipboard=unnamed
