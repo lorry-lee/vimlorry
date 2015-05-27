@@ -38,7 +38,7 @@ set clipboard=unnamed
 call pathogen#infect()
 
 " Open the explorer tree
-nmap <Leader>n :NERDTreeToggle<CR>
+nmap ,n :NERDTreeToggle<CR>
 " Ignore pyc files
 let NERDTreeIgnore = ['\.pyc$\|\.meta$']
 
@@ -136,7 +136,7 @@ map <silent> <F9> :if &guioptions =~# 'T' <Bar>
     \endif<CR>
 
 " Find current buffer in the NERD_Tree
-map <Leader>g :NERDTreeFind<CR>
+map ,g :NERDTreeFind<CR>
 
 " Switch between cpp and h files
 map <A-o> :A<CR>
@@ -248,8 +248,8 @@ function! g:PartialMatchSearch(pattern, searchDir)
     cw
 endfunction
 
-nmap <leader>f :FullMatchSearch <c-r>=expand("<cword>")<cr> 
-nmap <leader>F :PartialMatchSearch <c-r>=expand("<cword>")<cr> 
+nmap ,f :FullMatchSearch <c-r>=expand("<cword>")<cr> 
+nmap ,F :PartialMatchSearch <c-r>=expand("<cword>")<cr> 
 
 " Set tail height
 let g:tail#Height = 30
@@ -274,10 +274,10 @@ nmap mc i/*<Esc>wea*/<Esc>k
 " Use pylint
 set makeprg=pylint\ --reports=n\ --rcfile=pylint.conf\ --output-format=parseable\ %:p
 set errorformat=%f:%l:\ %m
-nmap <leader>m :make<cr> 
+nmap ,m :make<cr> 
 
 " Format json
-nmap <leader>j :%!python -m json.tool<cr>
+nmap ,j :%!python -m json.tool<cr>
 
 " Open as maximum window
 au GUIEnter * simalt ~x
