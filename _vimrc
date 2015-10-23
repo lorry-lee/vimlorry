@@ -42,6 +42,8 @@ nmap ,n :NERDTreeToggle<CR>
 " Ignore pyc files
 let NERDTreeIgnore = ['\.pyc$\|\.meta$']
 
+" Toggle quick fix window
+nmap ,q :QFix<CR>
 
 " Set background as back
 colo ayumi
