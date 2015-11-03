@@ -1,23 +1,25 @@
-let g:default_errorfile = $errorfile
-
 function! s:AsyncBuild(command)
-    setlocal errorformat=%f:%l:%c:\ %m
-    setlocal errorfile=g:default_errorfile
-    let make_cmd = a:command
-    let title = 'Make [%d]: '
-    let title .= "(default)"
-    call asynccommand#run(make_cmd, asynchandler#quickfix(&errorformat, title))
+    cexpr "Building..."
+    let format = "%f:%l:%c:\ %m"
+    call asynccommand#run(a:command, asynchandler#quickfix(format, 'Make [%d]: ' . a:command))
+endfunction
+
+function! s:AsyncBuildJava(command)
+    cexpr "Building..."
+    let format = "%f:%l:\ %m"
+    call asynccommand#run(a:command, asynchandler#quickfix(format, 'Make [%d]: ' . a:command))
 endfunction
 
 command! -nargs=+ -complete=file -complete=shellcmd AsyncBuild call s:AsyncBuild(<q-args>)
+command! -nargs=+ -complete=file -complete=shellcmd AsyncBuildJava call s:AsyncBuildJava(<q-args>)
 
 command Ga AsyncBuild("./build/cmake_generate_android_eclipse.bat")
 command Ba AsyncBuild("./build/build_android_native_debug.bat")
 command Bar AsyncBuild("./build/build_android_native_release.bat")
 command Baf AsyncBuild("./build/build_android_native_retail.bat")
-command Baj AsyncBuild("./demo/native/android/java/build_run_debug.bat")
-command Bac AsyncBuild("./demo/native/android/cpp/build_run_debug.bat")
-command Baw AsyncBuild("./demo/native/android/web/build_run_debug.bat")
+command Baj AsyncBuildJava("./demo/native/android/java/build_run_debug.bat")
+command Bac AsyncBuildJava("./demo/native/android/cpp/build_run_debug.bat")
+command Baw AsyncBuildJava("./demo/native/android/web/build_run_debug.bat")
 
 command Gw AsyncBuild("./build/cmake_generate_win32_2012.bat")
 command Bw AsyncBuild("./build/build_win32_2012_debug.bat")

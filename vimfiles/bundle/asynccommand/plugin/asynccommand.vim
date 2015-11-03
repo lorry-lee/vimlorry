@@ -20,20 +20,28 @@ if exists('g:loaded_asynccommand')
 endif
 let g:loaded_asynccommand = 1
 
+if &cp
+    echoerr "AsyncCommand cannot run in vi-compatible mode (see :help 'cp')."
+    finish
+elseif !has('clientserver')
+    echoerr "AsyncCommand requires vim compiled with +clientserver (see :help +clientserver)"
+    finish
+endif
+
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! AsyncCommandDone(file)
-  return asynccommand#done(a:file)
+function! AsyncCommandDone(file, return_code)
+    call asynccommand#done(a:file, a:return_code)
+    return ""
 endfunction
 
+command! AsyncPending call asynccommand#open_pending()
+
 command! -nargs=+ -complete=shellcmd AsyncCommand call asynccommand#run(<q-args>)
-
-" Examples below
-" ==============
-
 command! -nargs=+ -complete=file AsyncGrep call s:AsyncGrep(<q-args>)
-command! -nargs=+ -complete=file -complete=shellcmd AsyncShell call s:AsyncShell(<q-args>)
+" AsyncShell! for immutable preview window.
+command! -nargs=+ -complete=file -complete=shellcmd -bang AsyncShell call s:AsyncShell(<bang>0, <q-args>)
 command! -nargs=* AsyncMake call s:AsyncMake(<q-args>)
 
 command! -nargs=1 -complete=tag AsyncCscopeFindSymbol call s:AsyncCscopeFindX('s '. <q-args>)
@@ -42,32 +50,53 @@ command! -nargs=1 -complete=tag AsyncCscopeFindX call s:AsyncCscopeFindX(<q-args
 
 
 if (! exists("no_plugin_maps") || ! no_plugin_maps) &&
-      \ (! exists("no_asynccommand_maps") || ! no_asynccommand_maps)
-    nmap <unique> <A-S-g> :AsyncCscopeFindSymbol <C-r>=expand('<cword>')<CR><CR>
+            \ (! exists("no_asynccommand_maps") || ! no_asynccommand_maps)
+    nnoremap <unique> <A-S-g> :AsyncCscopeFindSymbol <C-r>=expand('<cword>')<CR><CR>
 endif
 
 """"""""""""""""""""""
 " Actual implementations
 
+" Fill in $* pattern for prg commands
+" grepprg and makeprg both allow an optional placeholder '$*' to specify where
+" arguments are included. If omitted, append a space and the arguments to the
+" end of the prg command.
+function! s:InsertArgumentsIntoPrgCmd(prg_command, arguments)
+    let placeholder_re = '\V$*'
+    let cmd = a:prg_command
+    if match(cmd, placeholder_re) < 0
+        let cmd .= ' $*'
+    endif
+
+    " Ensure user's escape sequences are passed to prg_command. Don't use
+    " shellescape: only want user's escapes passed along to work like :grep,
+    " etc...
+    let args = escape(a:arguments, '\')
+
+    return substitute(cmd, placeholder_re, args, 'g')
+endf
+
+
 " Grep
 "   - open result in quickfix
 function! s:AsyncGrep(query)
-    let grep_cmd = "grep --line-number --with-filename ".a:query
-    call asynccommand#run(grep_cmd, asynchandler#quickfix(&grepformat, '[Found: %s] grep ' . a:query))
+    let grep_cmd = s:InsertArgumentsIntoPrgCmd(&grepprg, a:query)
+    call asynccommand#run(grep_cmd, asynchandler#quickfix(&grepformat, '[Found: %d] grep ' . a:query))
 endfunction
 
 " Shell commands
 "   - open result in a split
-function! s:AsyncShell(command)
-    call asynccommand#run(a:command, asynchandler#split())
+"   - is_const_preview=false to allow editing and skip mappings
+function! s:AsyncShell(is_const_preview, command)
+    call asynccommand#run(a:command, asynchandler#split(a:is_const_preview))
 endfunction
 
 " Make
 "   - uses the current make program
 "   - optional parameter for make target(s)
 function! s:AsyncMake(target)
-    let make_cmd = &makeprg ." ". a:target
-    let title = 'Make: '
+    let make_cmd = s:InsertArgumentsIntoPrgCmd(&makeprg, a:target)
+    let title = 'Make [%d]: '
     if a:target == ''
         let title .= "(default)"
     else
@@ -89,25 +118,25 @@ endfunction
 " f > 7   Find this file
 " i > 8   Find files #including this file
 let s:type_char_to_num = {
-    \ 's': 0,
-    \ 'g': 1,
-    \ 'd': 2,
-    \ 'c': 3,
-    \ 't': 4,
-    \ 'e': 6,
-    \ 'f': 7,
-    \ 'i': 8,
-    \ }
+            \ 's': 0,
+            \ 'g': 1,
+            \ 'd': 2,
+            \ 'c': 3,
+            \ 't': 4,
+            \ 'e': 6,
+            \ 'f': 7,
+            \ 'i': 8,
+            \ }
 let s:num_to_description = {
-    \ 0: 'C symbol',
-    \ 1: 'Definition',
-    \ 2: 'Functions called by this function',
-    \ 3: 'Functions calling this function',
-    \ 4: 'Assignments to',
-    \ 6: 'Egrep pattern',
-    \ 7: 'File',
-    \ 8: '#including this file',
-    \ }
+            \ 0: 'C symbol',
+            \ 1: 'Definition',
+            \ 2: 'Functions called by this function',
+            \ 3: 'Functions calling this function',
+            \ 4: 'Assignments to',
+            \ 6: 'Egrep pattern',
+            \ 7: 'File',
+            \ 8: '#including this file',
+            \ }
 " Wrap AsyncCscopeFind to make it easier to do cscope searches. The user
 " passes everything as one parameter and doesn't have to use numbers.
 function! s:AsyncCscopeFindX(input)
@@ -149,9 +178,9 @@ function! s:AsyncCscopeFind(type_num, query, title)
 endfunction
 
 function! s:CscopeResults(title)
-  return asynchandler#quickfix("%-G>>%m,%f:%l\ %m", "[Found: %s] Cscope: " . a:title)
+    return asynchandler#quickfix("%-G>>%m,%f:%l\ %m", "[Found: %d] Cscope: " . a:title)
 endfunction
 
 let &cpo = s:save_cpo
 
-"vi:et:sw=4 ts=4
+" vi: et sw=4 ts=4
