@@ -178,8 +178,8 @@ autocmd BufWinLeave * call clearmatches()
 "au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>78v.\+', -1)
 
-autocmd BufWritePre  *.{as,lua,cpp,h,c,py,js,etc}  call StripTrailingWhite()
-autocmd BufWritePre  *.{as,lua,cpp,h,c,py,js,etc}  call StripTabs()
+autocmd BufWritePre  *.{as,lua,cpp,h,c,py,js,java,etc}  call StripTrailingWhite()
+autocmd BufWritePre  *.{as,lua,cpp,h,c,py,js,java,etc}  call StripTabs()
 function! StripTrailingWhite()
     let l:winview = winsaveview()
     silent! %s/\s\+$//
