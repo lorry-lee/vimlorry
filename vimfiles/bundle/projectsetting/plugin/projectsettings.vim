@@ -39,5 +39,5 @@ command Bo AsyncBuild("./build/build_osx_xcode_debug.sh")
 command Bor AsyncBuild("./build/build_osx_xcode_release.sh")
 command Bof AsyncBuild("./build/build_osx_xcode_retail.sh")
 
-command Bma AsyncBuild("./build/build_run_android_debug.bat")
-command Bmar AsyncBuild("./build/build_run_android_retail.bat")
+command Bma AsyncBuildJava("./build/build_run_android_debug.bat")
+command Bmar AsyncBuildJava("./build/build_run_android_retail.bat")
