@@ -9,7 +9,7 @@ endfunction
 
 function! s:AsyncBuildJava(command)
     cexpr "Building..."
-    let format = "%A%f:%l:\ %m,%-Z%p^,%-C%.%#"
+    let format = "%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%#"
     call asynccommand#run(a:command, asynchandler#quickfix(format, 'Make [%d]: ' . a:command))
 endfunction
 
@@ -41,3 +41,6 @@ command Bof AsyncBuild("./build/build_osx_xcode_retail.sh")
 
 command Bma AsyncBuildJava("./build/build_run_android_debug.bat")
 command Bmar AsyncBuildJava("./build/build_run_android_retail.bat")
+
+command Bmi AsyncBuild("./build/build_run_ios_debug.sh")
+command Bmir AsyncBuild("./build/build_run_ios_retail.sh")
