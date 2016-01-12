@@ -118,7 +118,11 @@ nmap <A-l> :wincmd l<CR>
 set number
 
 " Set font to couriernew
-set guifont=Bitstream_Vera_Sans_Mono:h10:cANSI
+" win
+set guifont=Bitstream_Vera_Sans_Mono:h11:cANSI
+" mac
+" set guifont=Bitstream\ Vera\ Sans\ Mono:h14
+
 "set guifont=Lucida_Console:h11
 "set guifont=monofur:h12
 

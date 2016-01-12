@@ -9,7 +9,7 @@ endfunction
 
 function! s:AsyncBuildJava(command)
     cexpr "Building..."
-    let format = "%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%#"
+    let format = "%A%f:%l:\ %m,%-Z%p^,%-C%.%#"
     call asynccommand#run(a:command, asynchandler#quickfix(format, 'Make [%d]: ' . a:command))
 endfunction
 
@@ -33,6 +33,7 @@ command Gi AsyncBuild("./build/cmake_generate_ios_xcode.sh")
 command Bi AsyncBuild("./build/build_ios_xcode_debug.sh")
 command Bir AsyncBuild("./build/build_ios_xcode_release.sh")
 command Bif AsyncBuild("./build/build_ios_xcode_retail.sh")
+command Bio AsyncBuild("./build/build_run_ios_demo_objc.sh")
 
 command Go AsyncBuild("./build/cmake_generate_osx_xcode.sh")
 command Bo AsyncBuild("./build/build_osx_xcode_debug.sh")
@@ -44,3 +45,4 @@ command Bmar AsyncBuildJava("./build/build_run_android_retail.bat")
 
 command Bmi AsyncBuild("./build/build_run_ios_debug.sh")
 command Bmir AsyncBuild("./build/build_run_ios_retail.sh")
+
