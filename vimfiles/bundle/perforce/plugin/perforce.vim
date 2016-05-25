@@ -531,7 +531,7 @@ endfunction
 " Get info about a changelist
 "----------------------------------------------------------------------------
 function s:P4GetChangelistInfo()
-    let listnum = "default"
+    let listnum = ""
     let listnum = s:P4GetChangelist( "Current changelists:\n" . s:P4GetChangelists(1) . "\nEnter changelist number: ", b:changelist )
     if listnum == ""
         echomsg "No changelist specified. Cancelled."

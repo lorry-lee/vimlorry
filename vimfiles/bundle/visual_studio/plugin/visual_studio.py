@@ -237,9 +237,10 @@ def dte_output (vs_pid, fn_output, window_caption, notify=None):
                     break
             time.sleep (0.1)
             tried += 1
-    lst_text = _fix_filenames (
-        get_project_paths(get_projects(dte)),
-        lst_text)
+    if window_caption not in ['Find Results 1', 'Find Results 2']:
+        lst_text = _fix_filenames (
+            get_project_paths(get_projects(dte)),
+            lst_text)
     sel.Collapse()
     fp_output = file (fn_output, 'w')
     fp_output.write ('\n'.join(lst_text))

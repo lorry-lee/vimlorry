@@ -1,4 +1,75 @@
-set nocompatible
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+"Plugin 'tpope/vim-fugitive'
+
+Plugin 'vim-scripts/a.vim'
+Plugin 'vim-scripts/AsyncCommand'
+Plugin 'vim-scripts/calendar.vim'
+Plugin 'bkad/CamelCaseMotion'
+Plugin 'vim-scripts/Colour-Sampler-Pack'
+Plugin 'vim-scripts/cSyntaxAfter'
+" ctags/
+Plugin 'kien/ctrlp.vim'
+Plugin 'vim-scripts/EasyGrep'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'lorry-lee/nerdtree'
+Plugin 'lorry-lee/perforce.vim'
+Plugin 'lorry-lee/projectsetting'
+Plugin 'lorry-lee/vim-ayumi'
+" Plugin 'vim-scripts/QFixToggle'
+Plugin 'kana/vim-smartinput'
+Plugin 'vim-scripts/snipMate'
+Plugin 'tpope/vim-surround'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/TagHighlight'
+Plugin 'vim-scripts/taglist.vim'
+" vcscommand/
+Plugin 'lorry-lee/visual_studio.vim'
+Plugin 'Valloric/YouCompleteMe'
+
+" plugin from http://vim-scripts.org/vim/scripts.html
+"Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+"Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
@@ -45,6 +116,7 @@ let NERDTreeIgnore = ['\.pyc$\|\.meta$']
 " Toggle quick fix window
 nmap ,q :QFix<CR>
 
+
 " Set background as back
 colo ayumi
 " colo bandit
@@ -57,6 +129,9 @@ set nobackup
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" Auto indent for languages such as actionscript
+set autoindent
 
 " No Auto change line in txt file
 set wrap
@@ -83,8 +158,6 @@ let g:ctrlp_prompt_mappings = { 'PrtSelectMove("j")':   ['<c-n>', '<down>'], 'Pr
 "map <S-o> :TlistToggle<CR>
 map <S-o> :TagbarToggle<CR>
 let g:Tlist_Ctags_Cmd='ctags.exe'
-"For mac
-"let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 " Just display the current buffer's functions
 let Tlist_Show_One_File = 1
 " Show tag list on the right side
@@ -106,6 +179,10 @@ map <C-F8> :QFix<CR>
 map <F8> :cn<CR>
 map <S-F8> :cp<CR>
 
+" YouCompleteMe
+nmap <C-]> :YcmCompleter GoTo<CR>
+let g:ycm_confirm_extra_conf = 0
+
 nmap <Tab> <C-W><C-W>
 nmap <A-k> :wincmd k<CR>
 nmap <A-j> :wincmd j<CR>
@@ -118,11 +195,7 @@ nmap <A-l> :wincmd l<CR>
 set number
 
 " Set font to couriernew
-" win
-set guifont=Bitstream_Vera_Sans_Mono:h11:cANSI
-" mac
-" set guifont=Bitstream\ Vera\ Sans\ Mono:h14
-
+set guifont=Bitstream_Vera_Sans_Mono:h12:cANSI
 "set guifont=Lucida_Console:h11
 "set guifont=monofur:h12
 
@@ -147,13 +220,19 @@ map ,g :NERDTreeFind<CR>
 " Switch between cpp and h files
 map <A-o> :A<CR>
 
+" Generate tags and cscope file, cscope_maps.vim will care about the bind
+function GenerateLatestTags()
+    silent !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q
+    silent !dir /s/b *.js,*.c,*.cpp,*.h,*.java >> cscope.files
+    silent !cscope -Rbk
+endfunction
+map <C-F12> :call GenerateLatestTags()<CR>
+let ctags_path="./tags"
+
+
 " let ctags_path+="C:\Python26\Lib\site-packages\django\tags"
 
 set completeopt=longest,menu " Don't display the preview window
-
-" YouCompleteMe
-nmap <C-]> :YcmCompleter GoTo<CR>
-let g:ycm_confirm_extra_conf = 0
 
 " Easy motion short cut key
 let g:EasyMotion_leader_key = ";"
@@ -182,8 +261,8 @@ autocmd BufWinLeave * call clearmatches()
 "au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>78v.\+', -1)
 
-autocmd BufWritePre  *.{as,lua,cpp,h,c,py,js,java,etc}  call StripTrailingWhite()
-autocmd BufWritePre  *.{as,lua,cpp,h,c,py,js,java,etc}  call StripTabs()
+"autocmd BufWritePre  *.{as,lua,cpp,h,c,py,js,java,etc}  call StripTrailingWhite()
+"autocmd BufWritePre  *.{as,lua,cpp,h,c,py,js,java,etc}  call StripTabs()
 function! StripTrailingWhite()
     let l:winview = winsaveview()
     silent! %s/\s\+$//
@@ -200,8 +279,6 @@ function ExplorerCurrentBuffer()
 endfunction
 " Open the selected buffer in windows explorer
 nmap <F10> :!start explorer /select, %:p<CR>
-" For Mac
-nmap <F10> :silent !open -R %:p<CR>
 
 " Show dec or hex of current number-word under cursor
 nnoremap gn :call DecAndHex(expand("<cWORD>"))<CR>
@@ -289,3 +366,23 @@ nmap ,j :%!python -m json.tool<cr>
 au GUIEnter * simalt ~x
 " For Mac
 " set lines=999 columns=999
+"
+function ToUplay()
+    silent !p4 set P4PORT=p4-obd.mtl.ubisoft.org:2386
+    silent !p4 set P4USER=xu.li
+    silent !p4 set P4CLIENT=xu.li_MTL-BD310
+endfunction
+
+function ToUplayReview()
+    silent !p4 set P4PORT=p4-obd.mtl.ubisoft.org:2386
+    silent !p4 set P4USER=xu.li
+    silent !p4 set P4CLIENT=xu.li_MTL-BD310_Review
+endfunction
+
+map <S-F9> :call ToUplay()<CR>
+map <A-F9> :call ToUplayReview()<CR>
+
+map <A-F8> :call copen()<CR>
+
+" Use default camel case motion settings
+call camelcasemotion#CreateMotionMappings(',')
