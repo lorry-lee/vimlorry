@@ -54,3 +54,15 @@ command Bmar AsyncBuildJava("./build/build_run_android_debug.bat")
 command Bmi AsyncBuild("./build/build_ios_debug.sh")
 command Bmir AsyncBuild("./build/build_run_ios_debug.sh")
 
+function! s:ToWorkSpace(name)
+    let hostname = substitute(system('hostname'), '\.\_.*$', '', '')
+    let hostname = substitute(hostname, '\n', '', '')
+    let p4command = 'p4 set P4CLIENT='.expand('$USERNAME').'_'.hostname.'_'.a:name
+    let sReturn = system( p4command )
+endfunction
+
+command! -nargs=+ -complete=file -complete=shellcmd ToWorkSpace call s:ToWorkSpace(<q-args>)
+
+command Ws1 ToWorkSpace 1
+command Ws2 ToWorkSpace 2
+command Ws3 ToWorkSpace 3
