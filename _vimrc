@@ -367,20 +367,6 @@ au GUIEnter * simalt ~x
 " For Mac
 " set lines=999 columns=999
 "
-function ToUplay()
-    silent !p4 set P4PORT=p4-obd.mtl.ubisoft.org:2386
-    silent !p4 set P4USER=xu.li
-    silent !p4 set P4CLIENT=xu.li_MTL-BD310
-endfunction
-
-function ToUplayReview()
-    silent !p4 set P4PORT=p4-obd.mtl.ubisoft.org:2386
-    silent !p4 set P4USER=xu.li
-    silent !p4 set P4CLIENT=xu.li_MTL-BD310_Review
-endfunction
-
-map <S-F9> :call ToUplay()<CR>
-map <A-F9> :call ToUplayReview()<CR>
 
 map <A-F8> :call copen()<CR>
 
