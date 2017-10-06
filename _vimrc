@@ -9,6 +9,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'sunaku/QFixToggle'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -112,10 +113,11 @@ call pathogen#infect()
 nmap ,n :NERDTreeToggle<CR>
 " Ignore pyc files
 let NERDTreeIgnore = ['\.pyc$\|\.meta$']
+let g:NERDTreeWinSize = 50
 
 " Toggle quick fix window
 nmap ,q :QFix<CR>
-
+let g:QFixToggle_FullWidth = 1
 
 " Set background as back
 colo ayumi
@@ -143,15 +145,22 @@ set formatoptions+=l
 
 
 " CtrlP settings
+set wildignore+=*\\bin\\**
+set wildignore+=*\\temp\\**
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip        " *.exe   Windows
 map <F3> :CtrlPMRUFiles<CR>
 let g:ctrlp_cmd = 'CtrlP .'
 let g:ctrlp_by_filename = 1
+let g:ctrlp_working_path_mode = 2
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|\.obj$\|\.pyc$\|\.meta$'
 let g:ctrlp_root_markers = ['.ycm_extra_conf.py']
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_prompt_mappings = { 'PrtSelectMove("j")':   ['<c-n>', '<down>'], 'PrtSelectMove("k")':   ['<c-p>', '<up>'], 'PrtHistory(-1)':       ['<c-j>'], 'PrtHistory(1)':        ['<c-k>'], 'PrtClearCache()':      ['<F4>'], } 
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
 
 " Taglist
 " Open tag list selector
@@ -367,6 +376,10 @@ au GUIEnter * simalt ~x
 " For Mac
 " set lines=999 columns=999
 "
+
+" Case insensitive search
+set ignorecase
+set smartcase
 
 map <A-F8> :call copen()<CR>
 
