@@ -1,0 +1,5 @@
+" Share the clipboard with windows
+set clipboard=unnamed
+
+" Highlight the search
+set hlsearch

@@ -1,0 +1,1 @@
+python install.py --clang-completer --gocode-completer --msvc=14

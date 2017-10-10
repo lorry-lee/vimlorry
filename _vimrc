@@ -111,7 +111,7 @@ endfunction
 set clipboard=unnamed
 
 " Plugin manager -- pathogen
-call pathogen#infect()
+" call pathogen#infect()
 
 " Open the explorer tree
 nmap ,n :NERDTreeToggle<CR>
@@ -202,7 +202,7 @@ nmap <A-j> :wincmd j<CR>
 nmap <A-h> :wincmd h<CR>
 nmap <A-l> :wincmd l<CR>
 
-" set encoding=utf-8
+set encoding=utf-8
 
 " Display line number
 set number
