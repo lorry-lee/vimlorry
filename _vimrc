@@ -6,8 +6,8 @@ filetype off                  " required
 "call vundle#begin()
 
 " set $HOME on windows environment variable first
-set rtp+=$HOME/vimfiles/bundle/Vundle.vim
-call vundle#begin('$HOME/vimfiles/bundle/')
+set rtp+=$HOME/.vim/bundle/Vundle.vim
+call vundle#begin('$HOME/.vim/bundle/')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
@@ -262,7 +262,7 @@ set noswapfile
 
 "Persistent undo
 set undofile                " Save undo's after file closes
-set undodir=$HOME/vimfiles/undo  " where to save undo histories, make sure it's existed, or else create it manually
+set undodir=$HOME/.vim/undo " where to save undo histories, make sure it's existed, or else create it manually
 set undolevels=1000         " How many undos
 set undoreload=10000        " number of lines to save for undo
 
