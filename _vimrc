@@ -369,6 +369,7 @@ nmap mc i/*<Esc>wea*/<Esc>k
 
 " Use pylint
 set makeprg=pylint\ --reports=n\ --rcfile=pylint.conf\ --output-format=parseable\ %:p
+" set makeprg=pylint\ --reports=n\ --disable=R,C,W\ --rcfile=pylint.conf\ --output-format=parseable\ %:p
 set errorformat=%f:%l:\ %m
 nmap ,m :make<cr> 
 
