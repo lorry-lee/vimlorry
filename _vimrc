@@ -44,6 +44,8 @@ Plugin 'vim-scripts/taglist.vim'
 " vcscommand/
 Plugin 'lorry-lee/visual_studio.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-scripts/Tail-Bundle'
+Plugin 'lorry-lee/ctags'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -170,11 +172,13 @@ let g:ctrlp_max_depth=40
 " Open tag list selector
 "map <S-o> :TlistToggle<CR>
 map <S-o> :TagbarToggle<CR>
-let g:Tlist_Ctags_Cmd='ctags.exe'
+let g:tagbar_ctags_bin='$HOME/.vim/bundle/ctags/ctags.exe'
+let g:Tlist_Ctags_Cmd='$HOME/.vim/bundle/ctags/ctags.exe'
 " Just display the current buffer's functions
 let Tlist_Show_One_File = 1
 " Show tag list on the right side
 let Tlist_Use_Right_Window = 1
+
 
 " Remap scroll up and scroll down
 noremap <C-j> <C-e>
@@ -195,13 +199,11 @@ map <S-F8> :cp<CR>
 " YouCompleteMe
 nmap <C-]> :YcmCompleter GoTo<CR>
 let g:ycm_confirm_extra_conf = 0
-
 nmap <Tab> <C-W><C-W>
 nmap <A-k> :wincmd k<CR>
 nmap <A-j> :wincmd j<CR>
 nmap <A-h> :wincmd h<CR>
 nmap <A-l> :wincmd l<CR>
-
 set encoding=utf-8
 
 " Display line number
