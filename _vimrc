@@ -133,10 +133,23 @@ colo ayumi
 " Set no back up swap file
 set nobackup
 
-" Set tab as 4 space
-set tabstop=4
+" virtual tabstops using spaces
 set shiftwidth=4
+set softtabstop=4
 set expandtab
+" allow toggling between local and default mode
+function TabToggle()
+  if &expandtab
+    set shiftwidth=4
+    set softtabstop=4
+    set noexpandtab
+  else
+    set shiftwidth=4
+    set softtabstop=4
+    set expandtab
+  endif
+endfunction
+nmap <F9> mz:execute TabToggle()<CR>'z
 
 " Auto indent for languages such as actionscript
 set autoindent
@@ -221,7 +234,7 @@ set guioptions-=T
 " Don't need to hit enter
 set cmdheight=3 lines=43
 
-map <silent> <F9> :if &guioptions =~# 'T' <Bar>
+map <silent> <A-F9> :if &guioptions =~# 'T' <Bar>
         \set guioptions-=T <Bar>
         \set guioptions-=m <bar>
     \else <Bar>
