@@ -36,7 +36,7 @@ Plugin 'lorry-lee/projectsetting'
 Plugin 'lorry-lee/vim-ayumi'
 " Plugin 'vim-scripts/QFixToggle'
 Plugin 'kana/vim-smartinput'
-Plugin 'vim-scripts/snipMate'
+" Plugin 'vim-scripts/snipMate'
 Plugin 'tpope/vim-surround'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/TagHighlight'
@@ -46,6 +46,8 @@ Plugin 'lorry-lee/visual_studio.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/Tail-Bundle'
 Plugin 'lorry-lee/ctags'
+Plugin 'fatih/vim-go'
+Plugin 'SirVer/ultisnips'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -221,6 +223,15 @@ nmap <A-j> :wincmd j<CR>
 nmap <A-h> :wincmd h<CR>
 nmap <A-l> :wincmd l<CR>
 set encoding=utf-8
+
+" make YCM compatible with UltiSnips
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Display line number
 set number
