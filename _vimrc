@@ -397,8 +397,12 @@ set wildmode=longest:full,full
 nmap mc i/*<Esc>wea*/<Esc>k
 
 " Use pylint
-set makeprg=pylint\ --reports=n\ --rcfile=pylint.conf\ --output-format=parseable\ %:p
+" set makeprg=pylint\ --reports=n\ --rcfile=pylint.conf\ --output-format=parseable\ %:p
 " set makeprg=pylint\ --reports=n\ --disable=R,C,W\ --rcfile=pylint.conf\ --output-format=parseable\ %:p
+" set errorformat=%f:%l:\ %m
+
+autocmd Filetype py setlocal makeprg=pylint\ --reports=n\ --rcfile=pylint.conf\ --output-format=parseable\ %:p
+autocmd Filetype go setlocal makeprg=go\ build
 set errorformat=%f:%l:\ %m
 nmap ,m :make<cr> 
 
