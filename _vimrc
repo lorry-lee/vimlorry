@@ -402,7 +402,7 @@ nmap mc i/*<Esc>wea*/<Esc>k
 " set errorformat=%f:%l:\ %m
 
 autocmd Filetype py setlocal makeprg=pylint\ --reports=n\ --rcfile=pylint.conf\ --output-format=parseable\ %:p
-autocmd Filetype go setlocal makeprg=go\ build
+autocmd Filetype go setlocal makeprg=go\ build\ %:p:h
 set errorformat=%f:%l:\ %m
 nmap ,m :make<cr> 
 
