@@ -48,6 +48,7 @@ Plugin 'vim-scripts/Tail-Bundle'
 Plugin 'lorry-lee/ctags'
 Plugin 'fatih/vim-go'
 Plugin 'SirVer/ultisnips'
+Plugin 'vim-syntastic/syntastic'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -241,6 +242,7 @@ set guifont=Bitstream_Vera_Sans_Mono:h12:cANSI
 "set guifont=Lucida_Console:h11
 "set guifont=monofur:h12
 
+
 "Toggle Menu and Toolbar
 set guioptions-=m
 set guioptions-=T
@@ -424,6 +426,13 @@ map <A-F8> :call copen()<CR>
 " Use default camel case motion settings
 call camelcasemotion#CreateMotionMappings(',')
 
+"set fileencodings=utf-8,ucs-bom,shift-jis,latin1,big5,gb18030,gbk,gb2312,cp936
+"set fileencoding=utf-8
+"set encoding=utf-8 
+"set termencoding=utf-8  
+"set guifont=Courier\ New\:h12  
+"set guifontwide=NSimsun\:h12  
+
 let g:tagbar_type_go = {
 	\ 'ctagstype' : 'go',
 	\ 'kinds'     : [
@@ -451,3 +460,6 @@ let g:tagbar_type_go = {
 	\ 'ctagsbin'  : 'gotags',
 	\ 'ctagsargs' : '-sort -silent'
 \ }
+
+let g:syntastic_go_checkers = ['go', 'golint']
+let g:syntastic_aggregate_errors = 1
