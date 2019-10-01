@@ -18,7 +18,7 @@ Plugin 'sunaku/QFixToggle'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 
 Plugin 'vim-scripts/a.vim'
 Plugin 'vim-scripts/AsyncCommand'
@@ -412,7 +412,7 @@ nmap ,m :make<cr>
 nmap ,j :%!python -m json.tool<cr>
 
 " Open as maximum window
-au GUIEnter * simalt ~x
+au GUIEnter * simalt ~n
 " For Mac
 " set lines=999 columns=999
 "
