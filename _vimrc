@@ -412,7 +412,7 @@ nmap ,m :make<cr>
 nmap ,j :%!python -m json.tool<cr>
 
 " Open as maximum window
-au GUIEnter * simalt ~n
+au GUIEnter * simalt ~x
 " For Mac
 " set lines=999 columns=999
 "
