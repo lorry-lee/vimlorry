@@ -155,7 +155,11 @@ function TabToggle()
     set expandtab
   endif
 endfunction
-nmap <F9> mz:execute TabToggle()<CR>'z
+" nmap <F9> mz:execute TabToggle()<CR>
+
+" async-run to open quickfix window
+noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
+
 
 " Auto indent for languages such as actionscript
 set autoindent
