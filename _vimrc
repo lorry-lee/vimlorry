@@ -21,7 +21,7 @@ Plugin 'sunaku/QFixToggle'
 Plugin 'tpope/vim-fugitive'
 
 Plugin 'vim-scripts/a.vim'
-Plugin 'vim-scripts/AsyncCommand'
+Plugin 'skywind3000/asyncrun.vim'
 Plugin 'vim-scripts/calendar.vim'
 Plugin 'bkad/CamelCaseMotion'
 Plugin 'vim-scripts/Colour-Sampler-Pack'
