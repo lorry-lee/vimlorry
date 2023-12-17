@@ -159,7 +159,7 @@ endfunction
 
 " async-run to open quickfix window
 noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
-
+let g:asyncrun_open = 8
 
 " Auto indent for languages such as actionscript
 set autoindent
